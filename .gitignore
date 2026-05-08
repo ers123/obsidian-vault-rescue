@@ -23,3 +23,8 @@ recovered/
 # Cache snapshots
 *.tar.gz
 *-cache-snapshot/
+
+# Personal launch notes — not for the public repo
+LAUNCH.md
+NOTES.md
+.private/
