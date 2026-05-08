@@ -13,7 +13,7 @@ you can; their results compose.
 | 6 | **Claude Code logs** | Files written via Claude | Medium | `extract_claude_logs.py`. Surprisingly rich if you used the agent. |
 | 7 | **Chrome history** | URLs you were researching | Low | `extract_chrome_history.py`. Doesn't recover notes — recovers *context* to rebuild them. |
 | 8 | **Web Clipper extension storage** | Recent clip URLs + titles + target paths | Low | `extract_web_clipper.py`. Tells you exactly what you most recently clipped. |
-| 9 | **AI chat URLs** (from Chrome history) | Full content of conversations | Manual | ChatGPT/Claude/Gemini conversations live on the providers' servers — re-visit each URL. |
+| 9 | **AI chat URLs** (from Chrome history) | Full content of conversations | Manual | ChatGPT/Claude/Gemini conversations live on the providers' servers — re-visit each URL. **For documents you co-created with an assistant, this is often the highest-yield single source. See [`06-ai-chat-recovery.md`](06-ai-chat-recovery.md).** |
 
 ## The merge order that worked for me
 

@@ -291,3 +291,52 @@ If you're reading this in panic right now: start with
 [`docs/01-diagnosis.md`](docs/01-diagnosis.md), don't reinstall
 anything, and accept that you'll probably get back more than
 you think.
+
+## Postscript — what I found later
+
+After publishing the first version of this repo I kept poking
+at the recovered material and found two things worth adding.
+
+### The skeleton paths encode a history I'd partly forgotten
+
+Joining every `<vaultId>-cache` database in the IndexedDB
+revealed not just "what files existed at the moment of the
+incident" but the *trail* of every folder reorganization the
+vault had been through. Looking at the cluster of mtimes for
+files inside `⚙️ 05-System/Templates/`, I could see that I'd
+spent a particular Sunday in March redesigning my template
+system — moving fifteen old templates into an `_Archive/`
+subfolder and creating five short new ones (Quick Note,
+Question, Project, Reference, Tag System Guide). None of those
+new templates had bodies in any backup store, but the path
+inventory made it clear the new system existed and was the
+intended structure to restore — not the old one.
+
+I wrote that observation up as a separate doc:
+[`docs/07-skeleton-archaeology.md`](docs/07-skeleton-archaeology.md).
+The recipes there for spotting renames, mass-moves, and
+restructures from path-and-mtime data alone are useful for
+anyone who's reorganized their vault more than once.
+
+### AI chat history was the single highest-yield recovery source
+
+The 348 ChatGPT / Claude / NotebookLM URLs in my Chrome history
+turned out to be more valuable than the IndexedDB extraction
+itself. Conversations I'd had with assistants while drafting
+notes were preserved verbatim on the providers' servers, and
+re-asking each one for "the markdown of the [topic] note we
+made together" returned paste-ready content for most of the
+documents I cared about — including the 5KB meta-prompt for an
+encyclopedia terminology dictionary generator that the
+IndexedDB couldn't help with at all.
+
+The technique is simple but I hadn't seen it written up
+anywhere. Full doc:
+[`docs/06-ai-chat-recovery.md`](docs/06-ai-chat-recovery.md).
+The short version: extract chat URLs from your browser history,
+open them, ask the assistant to re-output the document
+verbatim, paste back into the vault.
+
+If I were doing the recovery again from scratch knowing this,
+the order would be: AI chats first (highest yield), then
+IndexedDB backup, then Time Machine, then everything else.

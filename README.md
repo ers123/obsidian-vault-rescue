@@ -52,10 +52,18 @@ merge, and selectively restore from.
 | Obsidian IndexedDB `*-backup` | Recent edited files, full content | `scripts/extract_obsidian_indexeddb.py` |
 | Obsidian IndexedDB `*-cache/metadata` | Frontmatter and headings for every file in the vault | (same script) |
 | Claude Code conversation logs | Every file written or edited via Claude | `scripts/extract_claude_logs.py` |
-| Chrome browsing history | URLs you were researching — re-visit to rebuild context | `scripts/extract_chrome_history.py` |
+| Chrome browsing history | URLs you were researching, AI chat URLs (see below) | `scripts/extract_chrome_history.py` |
 | Obsidian Web Clipper extension | Recent clipping history (URL, title, target path) | `scripts/extract_web_clipper.py` |
+| **AI chat history (ChatGPT, Claude, NotebookLM, …)** | **Whole notes you co-created with an assistant — paste-ready** | manual; URL list comes from Chrome history |
 
 A single orchestrator, `scripts/recover.py`, runs them all.
+
+The last row turned out to be the highest-yield path for me.
+Conversations you had with AI assistants while writing notes
+live on the providers' servers, untouched by local data loss.
+For documents you co-created with an assistant — drafts,
+prompts, summaries — you can usually re-extract them verbatim
+in one prompt. See [`docs/06-ai-chat-recovery.md`](docs/06-ai-chat-recovery.md).
 
 ## Quick start
 
@@ -140,6 +148,17 @@ The short version:
 analysis of the architectural choices that make this loss
 pattern inevitable, and why none of them are bugs Apple would
 describe as broken.
+
+## Two recovery techniques you don't see elsewhere
+
+- [`docs/06-ai-chat-recovery.md`](docs/06-ai-chat-recovery.md) —
+  using your AI chat history (ChatGPT, Claude, NotebookLM, …)
+  as a primary content recovery source. The single most
+  surprising thing in my own recovery.
+- [`docs/07-skeleton-archaeology.md`](docs/07-skeleton-archaeology.md)
+  — reading the set of recovered skeleton paths to reconstruct
+  vault history (folder reorganizations, mass moves, template
+  redesigns) that no single file by itself records.
 
 ## Contributing
 
