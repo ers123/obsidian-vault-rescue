@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+
+# macOS
+.DS_Store
+
+# Editor
+.idea/
+.vscode/
+*.swp
+
+# Recovery output (anyone running locally will create this; don't commit)
+recovered/
+*-recovered/
+*-rescue/
+*.recovery/
+
+# Cache snapshots
+*.tar.gz
+*-cache-snapshot/
