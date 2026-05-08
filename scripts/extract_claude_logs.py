@@ -96,7 +96,7 @@ def main() -> None:
         if had_write:
             logs_with_writes += 1
 
-    print(f"📊 scanned {total_logs} logs ({logs_with_writes} touched the vault)")
+    print(f"scanned {total_logs} logs ({logs_with_writes} touched the vault)")
     print(f"   bad lines: {bad_lines}")
     print(f"   unique files written: {len(writes)}")
     print(f"   unique files edited:  {len(edits)}")
@@ -135,8 +135,8 @@ def main() -> None:
                 applied += 1
         out.write_text(text, encoding="utf-8")
 
-    print(f"\n✅ saved {saved} files to {args.output}")
-    print(f"✅ applied {applied} sequential edits on top")
+    print(f"\nsaved {saved} files to {args.output}")
+    print(f"applied {applied} sequential edits on top")
 
 
 if __name__ == "__main__":

@@ -90,7 +90,7 @@ def main() -> None:
             f.write("visited\turl\ttitle\tvisit_count\n")
             for r in rows:
                 f.write("\t".join(str(x) for x in r) + "\n")
-        print(f"  📝 {name}: {len(rows)} rows")
+        print(f"  wrote {name}: {len(rows)} rows")
 
     # All visits in range
     rows = query(db, base + " ORDER BY last_visit_time DESC", (args.start, args.end))
@@ -140,10 +140,10 @@ def main() -> None:
         f.write("domain\tcount\n")
         for r in rows:
             f.write("\t".join(str(x) for x in r) + "\n")
-    print(f"  📝 top_domains.tsv: {len(rows)} rows")
+    print(f"  wrote top_domains.tsv: {len(rows)} rows")
 
     db.close()
-    print(f"\n📁 Output: {args.output}")
+    print(f"\nOutput: {args.output}")
 
 
 if __name__ == "__main__":

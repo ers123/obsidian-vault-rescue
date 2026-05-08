@@ -83,7 +83,7 @@ tags:
   - ai/tools
 ---
 
-<!-- ⚠️ SKELETON ONLY: body text not recoverable from cache. -->
+<!-- SKELETON ONLY: body text not recoverable from cache. -->
 <!-- mtime: 2026-04-10T11:42:07  size: 924B  hash: 99894dd4 -->
 
 # Andrej Karpathy

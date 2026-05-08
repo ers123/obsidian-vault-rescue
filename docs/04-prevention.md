@@ -28,13 +28,13 @@ storage with the local copy as a cache.
 ### 1. Vault location
 
 ```
-✅  ~/Obsidian/
-✅  ~/Notes/
-✅  /Volumes/MyExternalSSD/Obsidian/   (if you treat it as primary)
+OK:    ~/Obsidian/
+OK:    ~/Notes/
+OK:    /Volumes/MyExternalSSD/Obsidian/   (if you treat it as primary)
 
-❌  ~/Documents/Obsidian/   (if iCloud Documents sync is on)
-❌  ~/Desktop/Obsidian/
-❌  ~/Library/Mobile Documents/com~apple~CloudDocs/Obsidian/  (this IS iCloud Drive)
+AVOID: ~/Documents/Obsidian/   (if iCloud Documents sync is on)
+AVOID: ~/Desktop/Obsidian/
+AVOID: ~/Library/Mobile Documents/com~apple~CloudDocs/Obsidian/  (this IS iCloud Drive)
 ```
 
 ### 2. Multi-device sync — choose one, not iCloud

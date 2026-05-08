@@ -104,12 +104,12 @@ def main() -> None:
 
     print()
     print("=" * 60)
-    print(f"📁 Output: {args.output}")
+    print(f"Output: {args.output}")
     if failures:
-        print(f"⚠️  Some sources failed: {', '.join(failures)}")
+        print(f"Some sources failed: {', '.join(failures)}")
         print("   Check the messages above; partial recovery is normal.")
     else:
-        print("✅ All sources completed.")
+        print("All sources completed.")
     print()
     print("Next steps:")
     print(f"  1. Review {args.output}/ for full-content recoveries")

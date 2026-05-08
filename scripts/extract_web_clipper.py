@@ -89,10 +89,10 @@ def main() -> None:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(unique, indent=2, ensure_ascii=False))
 
-    print(f"📊 found {len(unique)} unique clipping history entries")
+    print(f"found {len(unique)} unique clipping history entries")
     for e in unique[:10]:
         print(f"  {e['datetime']}  {e['title'][:60]}  →  {e['url'][:60]}")
-    print(f"\n📁 Output: {args.output}")
+    print(f"\nOutput: {args.output}")
 
 
 if __name__ == "__main__":

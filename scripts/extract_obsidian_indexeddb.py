@@ -116,7 +116,7 @@ def extract_backups(db, output_dir: Path) -> tuple[int, int, list[tuple]]:
                     manifest.append((ts_iso, str(rel), len(data)))
                     recovered += 1
             except Exception as e:
-                print(f"  ⚠️  store '{store_name}' aborted: {e}")
+                print(f"  store '{store_name}' aborted: {e}")
 
     return recovered, bad[0], manifest
 
@@ -214,7 +214,7 @@ def extract_skeletons(
                     lines.append("---")
                     lines.append("")
                 lines.append(
-                    "<!-- ⚠️ SKELETON ONLY: body text not recoverable from cache. -->"
+                    "<!-- SKELETON ONLY: body text not recoverable from cache. -->"
                 )
                 lines.append(
                     f"<!-- mtime: {mt_iso}  size: {size}B  hash: {h[:12]} -->"
@@ -231,7 +231,7 @@ def extract_skeletons(
                         f"<!-- {len(items)} list items existed but text not in cache -->"
                     )
             else:
-                lines.append("<!-- ⚠️ FILE EXISTED but no metadata cached -->")
+                lines.append("<!-- FILE EXISTED but no metadata cached -->")
                 lines.append(f"<!-- mtime: {mt_iso}  size: {size}B -->")
 
             skel_path.write_text("\n".join(lines), encoding="utf-8")
@@ -255,15 +255,15 @@ def main() -> None:
     args = parser.parse_args()
 
     leveldb, blob = find_obsidian_idb(args.indexeddb)
-    print(f"📂 leveldb: {leveldb}")
-    print(f"📂 blob:    {blob}")
+    print(f"leveldb: {leveldb}")
+    print(f"blob:    {blob}")
 
     db = ccl_chromium_indexeddb.WrappedIndexDB(leveldb, blob)
     args.output.mkdir(parents=True, exist_ok=True)
 
     print("\n=== Phase 1: backup store (full bodies) ===")
     recovered, bad, manifest = extract_backups(db, args.output)
-    print(f"  ✅ recovered: {recovered} files (deserialization errors: {bad})")
+    print(f"  recovered: {recovered} files (deserialization errors: {bad})")
 
     recovered_paths = {p for _, p, _ in manifest}
 
@@ -271,8 +271,8 @@ def main() -> None:
     skel_count, full_listing = extract_skeletons(
         db, args.output, recovered_paths
     )
-    print(f"  ✅ skeletons: {skel_count} files")
-    print(f"  📊 inventory: {len(full_listing)} total files in vault")
+    print(f"  skeletons: {skel_count} files")
+    print(f"  inventory: {len(full_listing)} total files in vault")
 
     # Write manifests
     manifest.sort(reverse=True)
@@ -295,7 +295,7 @@ def main() -> None:
     print("\n=== Recovery distribution ===")
     for ym, n in sorted(months.items(), reverse=True)[:10]:
         print(f"  {ym}: {n}")
-    print(f"\n📁 Output: {args.output}")
+    print(f"\nOutput: {args.output}")
 
 
 if __name__ == "__main__":
