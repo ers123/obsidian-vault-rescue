@@ -125,11 +125,16 @@ def extract_skeletons(
     db, output_dir: Path, recovered_paths: set[str]
 ) -> tuple[int, list[tuple]]:
     """Generate skeleton .md (frontmatter + headings) for files we could not
-    recover bodies for, by joining the cache's `file` and `metadata` stores.
+    recover bodies for, by joining each cache database's `file` and
+    `metadata` stores.
 
     `file` store maps path → {mtime, size, hash}.
     `metadata` store maps content hash → {frontmatter, headings, listItems, …}.
-    Skeletons preserve the structure that *would* have been in each note.
+
+    Note: a single LevelDB can hold multiple `<vaultId>-cache` databases —
+    one per vault Obsidian has ever opened from this app data dir, including
+    older vault ids. We iterate all of them and union their inventories so
+    skeletons survive a vault rename or rebuild.
     """
     bad = [0]
 
@@ -137,6 +142,9 @@ def extract_skeletons(
         bad[0] += 1
 
     listing: list[tuple[str, str, int, str]] = []
+    skel_dir = output_dir / "_SKELETONS"
+    skel_count = 0
+
     for db_id in db.database_ids:
         database = db[db_id]
         if not database.name.endswith("-cache"):
@@ -167,8 +175,6 @@ def extract_skeletons(
                         key = key[len("<IdbKey ") : -1]
                     hash_to_meta[key] = r.value
 
-        skel_dir = output_dir / "_SKELETONS"
-        skel_count = 0
         for path, finfo in path_to_file.items():
             if not path.endswith(".md"):
                 continue
@@ -183,8 +189,14 @@ def extract_skeletons(
             if path in recovered_paths:
                 continue
 
-            meta = hash_to_meta.get(h)
             skel_path = skel_dir / path
+            # If multiple cache dbs hold the same path, prefer the one with
+            # richer metadata (later iterations can overwrite, which is fine
+            # because we re-resolve `meta` and `mtime` from the current db).
+            if skel_path.exists():
+                continue
+
+            meta = hash_to_meta.get(h)
             skel_path.parent.mkdir(parents=True, exist_ok=True)
 
             lines: list[str] = []
@@ -225,9 +237,7 @@ def extract_skeletons(
             skel_path.write_text("\n".join(lines), encoding="utf-8")
             skel_count += 1
 
-        return skel_count, listing
-
-    return 0, listing
+    return skel_count, listing
 
 
 def main() -> None:

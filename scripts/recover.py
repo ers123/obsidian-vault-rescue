@@ -24,7 +24,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 
 
 def run(cmd: list[str]) -> int:
-    print(f"\n$ {' '.join(cmd)}")
+    print(f"\n$ {' '.join(cmd)}", flush=True)
     return subprocess.call(cmd)
 
 
