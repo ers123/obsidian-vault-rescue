@@ -48,7 +48,7 @@ def safe_relative(file_path: str) -> Path | None:
     """Map an Obsidian file path back to a vault-relative Path.
 
     Obsidian writes absolute paths like
-        /Users/yohan/Documents/Obsidian/some/note.md
+        /Users/<you>/Documents/Obsidian/some/note.md
     We strip everything up to and including the vault root segment so the
     output mirrors the vault structure regardless of where it lived.
     """
